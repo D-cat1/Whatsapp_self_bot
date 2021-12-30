@@ -8,7 +8,7 @@ module.exports = {
         dialect: 'sqlite',
         storage: './selfbt.db',
         logging: false
-    }) : new Sequelize(process.env.DATABASE_URL, {dialectOptions: {ssl: {require: true, rejectUnauthorized: false}}}),
+    }) : new Sequelize(process.env.DATABASE_URL, {dialectOptions: {ssl: {require: true, rejectUnauthorized: false}}, logging: false}),
     PREFIX: process.env.PREFIX === undefined ? '.' : process.env.PREFIX,
     OTUSER: process.env.OTUSER == undefined ? [] : JSON.parse(process.env.OTUSER),
     HEROKU: process.env.HEROKU == undefined ? false : true,
