@@ -39,7 +39,7 @@ function cek_admin(array_admin, numb) {
 }
 
 function checker_reply(msg) {
-    if (msg.message.extendedTextMessage?.contextInfo?.quotedMessage != null || msg.message.extendedTextMessage?.contextInfo?.quotedMessage != undefined) {
+    if (msg.message?.extendedTextMessage?.contextInfo?.quotedMessage != null || msg.message?.extendedTextMessage?.contextInfo?.quotedMessage != undefined) {
         return true
     } else {
         return false
