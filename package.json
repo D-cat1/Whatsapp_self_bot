@@ -1,0 +1,41 @@
+{
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/D-cat1/Whatsapp_self_bot.git"
+  },
+  "dependencies": {
+    "@adiwajshing/baileys-md": "github:adiwajshing/baileys#multi-device",
+    "aria2": "^4.1.2",
+    "cloudflare": "^2.9.1",
+    "dotenv": "^10.0.0",
+    "googleapis": "^92.0.0",
+    "got": "^11.8.3",
+    "humanize-duration": "^3.27.0",
+    "mathjs": "^10.0.1",
+    "mime": "^2.5.2",
+    "pg": "^8.7.1",
+    "pino": "^7.0.5",
+    "rclone.js": "^0.5.0",
+    "readline": "^1.3.0",
+    "sequelize": "^6.8.0",
+    "sharp": "^0.29.3",
+    "simple-git": "^2.48.0",
+    "sqlite3": "^5.0.2",
+    "youtube-dl-exec": "^1.3.2",
+    "yt-search": "^2.10.2"
+  },
+  "name": "waself_bot",
+  "bugs": {
+    "url": "https://github.com/D-cat1/Whatsapp_self_bot/issues"
+  },
+  "homepage": "https://github.com/D-cat1/Whatsapp_self_bot#readme",
+  "version": "0.0.2",
+  "description": "self-bot in Whatsapp-MD",
+  "main": "inti.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node inti.js"
+  },
+  "author": "Dcat",
+  "license": "ISC"
+}
