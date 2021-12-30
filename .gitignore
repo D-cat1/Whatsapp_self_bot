@@ -5,3 +5,4 @@ testdb.js
 err.js
 module/
 node_modules
+.env
