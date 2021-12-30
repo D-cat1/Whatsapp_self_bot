@@ -16,7 +16,6 @@ const {
     proto,
     prepareWAMessageMedia
 } = require('@adiwajshing/baileys-md')
-const ytdll = require('./module/ytdl')
 const fs = require('fs')
 const comandtes = require('./command_list')
 const path = require('path')
