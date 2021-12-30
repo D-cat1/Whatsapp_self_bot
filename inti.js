@@ -119,6 +119,8 @@ async function mainWa() {
             } else {
                 dataconv = 'terserah AU'
             }
+            } else {
+               dataconv = 'terserah AU' 
             }
             const commandh = dataconv.split(' ')
             const alltext = dataconv.split(commandh[0] + ' ');
