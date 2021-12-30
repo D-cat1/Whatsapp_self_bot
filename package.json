@@ -20,7 +20,7 @@
     "sequelize": "^6.8.0",
     "sharp": "^0.29.3",
     "simple-git": "^2.48.0",
-    "sqlite3": "^5.0.2",
+    "sqlite3": "^5.0.2"
   },
   "name": "waself_bot",
   "bugs": {
