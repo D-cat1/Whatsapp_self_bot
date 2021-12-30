@@ -122,6 +122,7 @@ async function mainWa() {
             } else {
                dataconv = 'terserah AU' 
             }
+            console.log(dataconv)
             const commandh = dataconv.split(' ')
             const alltext = dataconv.split(commandh[0] + ' ');
             const isNoArgs = () => {
