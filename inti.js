@@ -117,7 +117,7 @@ async function mainWa() {
             } else if (msg.message.buttonsResponseMessage != null){
                 dataconv = msg.message.buttonsResponseMessage.selectedButtonId
             } else {
-                dataconv = 'terserah'
+                dataconv = 'terserah AU'
             }
             }
             const commandh = dataconv.split(' ')
