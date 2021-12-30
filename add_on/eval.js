@@ -14,9 +14,3 @@ whatscmd.addCmd({name : 'term', desc:'eval terminal', hint: '.term ls'}, async (
          await client.sendMessage(msg.to, {text: '```'+ user +':~# ' + args + '\n' + stdout + '```'});
       });
 })
-
-whatscmd.addCmd({on: 'message'}, async (client, msg, args) => {
-    if (msg.message.message.conversation == 'helo'){
-        msg.reply('hai')
-    }
-})
