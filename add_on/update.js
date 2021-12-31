@@ -55,7 +55,7 @@ whats.addCmd({
 
         const templateMessage = {
             text: update,
-            footer: 'Hello World',
+            footer: 'Klik update sekarang untuk update',
             templateButtons: templateButtons
         }
 
@@ -77,6 +77,5 @@ whats.addCmd({
     git.fetch('origin', config.BRANCH)
     git.reset('hard', ['FETCH_HEAD'])
     await git.push('udhe', config.BRANCH)
-
     await msg.reply('update berhasil\nmerestart....')
 })

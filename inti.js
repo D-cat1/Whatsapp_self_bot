@@ -116,6 +116,8 @@ async function mainWa() {
                 dataconv = msg.message.listResponseMessage.singleSelectReply.selectedRowId
             } else if (msg.message.buttonsResponseMessage != null){
                 dataconv = msg.message.buttonsResponseMessage.selectedButtonId
+            } else if (msg.message.templateButtonReplyMessage != null){
+                dataconv = msg.message.templateButtonReplyMessage.selectedId
             } else {
                 dataconv = ''
             }
@@ -192,6 +194,14 @@ async function mainWa() {
                         }
                     }
                 } else if (msg.message.buttonsResponseMessage != null){
+                    if (mesej.on == undefined && mesej.disable_cmd) {
+                        if (mesej.name == commandh[0]) {
+                            if (msg.key.fromMe === mesej.fromMe || mesej.fromMe === sudo.includes(get_numb)){
+                                mesej.callb(startWA, all_func, alltext[1])
+                            }
+                        }
+                    }
+                } else if (msg.message.templateButtonReplyMessage != null){
                     if (mesej.on == undefined && mesej.disable_cmd) {
                         if (mesej.name == commandh[0]) {
                             if (msg.key.fromMe === mesej.fromMe || mesej.fromMe === sudo.includes(get_numb)){
