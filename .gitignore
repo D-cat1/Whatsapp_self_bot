@@ -7,3 +7,4 @@ module/
 node_modules
 .env
 selfbt.db
+git_test.js
