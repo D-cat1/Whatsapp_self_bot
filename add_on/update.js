@@ -59,7 +59,7 @@ whats.addCmd({
             templateButtons: templateButtons
         }
 
-        await whatsapp.sendMessage(msg.id, templateMessage)
+        await whatsapp.sendMessage(msg.to, templateMessage)
     }
 })
 
