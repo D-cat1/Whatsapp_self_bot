@@ -2,7 +2,7 @@ const {
     default: simple_git
 } = require('simple-git')
 const git = simple_git()
-const config = require('./config')
+const config = require('../config')
 const {
     default: got
 } = require('got')
