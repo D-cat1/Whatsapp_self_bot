@@ -117,10 +117,10 @@ async function mainWa() {
             } else if (msg.message.buttonsResponseMessage != null){
                 dataconv = msg.message.buttonsResponseMessage.selectedButtonId
             } else {
-                dataconv = 'terserah AU'
+                dataconv = ''
             }
             } else {
-               dataconv = 'terserah AU' 
+               dataconv = '' 
             }
             const commandh = dataconv.split(' ')
             const alltext = dataconv.split(commandh[0] + ' ');
@@ -152,7 +152,8 @@ async function mainWa() {
                 to: to,
                 isReply: checker_reply(msg),
                 NewPushName: isName,
-                reply: replyMsg
+                reply: replyMsg,
+                txtmsg: dataconv
             }
             comandtes.Allcmd.map(async (mesej) => {
                 if (msg.message?.conversation != '' || msg.message.extendedTextMessage != null) {
