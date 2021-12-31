@@ -6,6 +6,7 @@ const config = require('../config')
 const {
     default: got
 } = require('got')
+const whats = require('../command_list')
 
 async function git_urls() {
     return new Promise(async (resolve) => {
@@ -23,7 +24,7 @@ async function git_urls() {
 }
 
 
-allpg.addCmd({
+whats.addCmd({
     name: 'update',
     desc: 'mengupdate self bot'
 }, async (whatsapp, msg, args) => {
