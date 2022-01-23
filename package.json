@@ -4,8 +4,9 @@
     "url": "git+https://github.com/D-cat1/Whatsapp_self_bot.git"
   },
   "dependencies": {
-    "@adiwajshing/baileys-md": "github:adiwajshing/baileys#multi-device",
+    "@adiwajshing/baileys": "github:adiwajshing/baileys",
     "aria2": "^4.1.2",
+    "byte-size": "^8.1.0",
     "cloudflare": "^2.9.1",
     "dotenv": "^10.0.0",
     "googleapis": "^92.0.0",
@@ -30,7 +31,6 @@
   "version": "0.0.2",
   "description": "self-bot in Whatsapp-MD",
   "main": "inti.js",
-  "devDependencies": {},
   "scripts": {
     "start": "node inti.js"
   },

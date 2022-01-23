@@ -56,14 +56,16 @@ whatscmd.addCmd({
     if (msg.isReply) {
         var info = {}
         const jid_quoted = msg.message.message.extendedTextMessage.contextInfo.remoteJid == '' ? msg.message.message.extendedTextMessage.contextInfo.participant : msg.message.message.extendedTextMessage.contextInfo.remoteJid
+        const key =  msg.message.message.extendedTextMessage.contextInfo.stanzaId
         const text = msg.message.message.extendedTextMessage.contextInfo.quotedMessage.conversation == '' ? msg.message.message.extendedTextMessage.contextInfo.quotedMessage.extendedTextMessage == null ? 'jangan reply selain text!' : msg.message.message.extendedTextMessage.contextInfo.quotedMessage.extendedTextMessage.text : msg.message.message.extendedTextMessage.contextInfo.quotedMessage.conversation || 'jangan reply selain text!'
+        const data_quote = await msg.loadmsg(msg.to, key)
         try {
             const newa = await client.profilePictureUrl(jid_quoted, 'preview')
             info['pp'] = newa
         } catch (a) {
             info['pp'] = 'https://i.ibb.co/PN1NkpY/avatrs.png'
         }
-        if (msg.NewPushName(jid_quoted) == null) {
+        if (data_quote.pushName == null) {
             if (msg.noArgs) {
                 client.sendMessage(msg.to, {
                     text: 'Nama Tidak Terdeteksi Membutuhkan input manual'
@@ -77,7 +79,7 @@ whatscmd.addCmd({
                 })
             }
         } else {
-            info['name'] = msg.NewPushName(jid_quoted)
+            info['name'] = data_quote.pushName
             info['text'] = text
             const databuff = await generate(info)
             await client.sendMessage(msg.to, {

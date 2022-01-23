@@ -1,61 +1,76 @@
 const {
     default: makeWASocket,
     BufferJSON,
-    initInMemoryKeyStore,
-} = require('@adiwajshing/baileys-md')
+    makeInMemoryStore
+} = require('@adiwajshing/baileys')
+
 const loeg = require('pino')
 const fs = require('fs')
 const {
     cekdb,
     updatesesi
 } = require('./db/connection')
+const {
+    cekch,
+    updatelsch,
+    addch
+} = require('./db/chat')
+
 const Mime = require('mime/Mime')
-const loadState = async () => {
-    let state
-    try {
-        const data = await cekdb()
-        const value = JSON.parse(data[0].dataValues.data, BufferJSON.reviver)
-        state = {
-            creds: value.creds,
-            // stores pre-keys, session & other keys in a JSON object
-            // we deserialize it here
-            keys: initInMemoryKeyStore(value.keys, async () => await saveState(jsonsesi.state))
-        }
-    } catch (e) {
-        console.log(e)
-    }
-    return state
-}
+
+const store = makeInMemoryStore({
+    logger: loeg.pino().child({
+        level: 'debug',
+        stream: 'store'
+    })
+})
 
 const saveState = async (state) => {
     console.log('menyimpan sesi')
     await updatesesi(JSON.stringify(state, BufferJSON.replacer, 2))
 }
 
+
 const load_temp_state = async () => {
     console.log('mengambil sesi...')
     try {
         const data = await cekdb()
         fs.writeFileSync(
-			'temp.json',
-			// BufferJSON replacer utility saves buffers nicely
-			data[0].dataValues.data
-		)
+            'temp.json',
+            // BufferJSON replacer utility saves buffers nicely
+            data[0].dataValues.data
+        )
     } catch (e) {
         console.log(e)
     }
 }
+
+(async () => {
+    const cek_ch = await cekch()
+    if (cek_ch.length == 1) {
+        console.log('load data')
+        const ch = JSON.parse(cek_ch[0].dataValues.data)
+        store.fromJSON(ch)
+    } else {
+        await addch('null')
+    }
+    // save every 10s
+    setInterval(async () => {
+        await updatelsch(JSON.stringify(store.toJSON()))
+    }, 10_000)
+})()
 
 const startSock = (statik) => {
     const sock = makeWASocket({
         logger: loeg.pino({
             level: 'silent'
         }),
-        auth: statik, 
+        auth: statik,
         getMessage: async (key) => {
             console.log(key)
         }
     })
+    store.bind(sock.ev)
     return sock
 }
 
@@ -89,18 +104,20 @@ const cektipe = (file) => {
 }
 
 fs.watchFile('temp.json', async () => {
-    if (fs.existsSync('temp.json')){
-    const json_pare = JSON.parse(fs.readFileSync('temp.json'), BufferJSON.reviver)
-    await saveState(json_pare)
+    if (fs.existsSync('temp.json')) {
+        const json_pare = JSON.parse(fs.readFileSync('temp.json'), BufferJSON.reviver)
+        await saveState(json_pare)
     }
 })
+
+
 
 module.exports = {
     startSock,
     saveState,
-    loadState,
     lengthdb,
     getMBsize,
     cektipe,
-    load_temp_state
+    load_temp_state,
+    store
 }

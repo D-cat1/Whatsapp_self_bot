@@ -4,8 +4,10 @@ const {
     lengthdb,
     getMBsize,
     cektipe,
-    load_temp_state
+    load_temp_state,
+    store
 } = require('./Wasettings');
+
 
 const {
     DisconnectReason,
@@ -14,13 +16,13 @@ const {
     useSingleFileAuthState,
     generateWAMessageFromContent,
     proto,
-    prepareWAMessageMedia
-} = require('@adiwajshing/baileys-md')
+    prepareWAMessageMedia,
+} = require('@adiwajshing/baileys')
+let id_antiduplicate = ''
 const fs = require('fs')
 const comandtes = require('./command_list')
 const path = require('path')
 const config = require('./config')
-const saveName = []
 const sudo = config.OTUSER
 
 
@@ -46,17 +48,7 @@ function checker_reply(msg) {
     }
 }
 
-function cek_admin(array_admin, numb) {
-    return new Promise((resolve) => {
-        array_admin.forEach(a => {
-            if (a.id === numb && a.admin != null) {
-                resolve(true)
-            } else if (a.id === numb) {
-                resolve(false)
-            };
-        });
-    })
-}
+
 
 console.log('memuat add-on..')
 fs.readdirSync('./add_on').forEach(plugin => {
@@ -89,7 +81,7 @@ async function mainWa() {
                 // akan langsung rekonek jika tidak logout
                 console.log(lastDisconnect)
                 if (lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut) {
-                    startWA()
+                    mainWa()
                 } else {
                     console.log('connection closed');
                 };
@@ -97,15 +89,12 @@ async function mainWa() {
         });
 
         startWA.ev.on('creds.update', async () => await saveState(startWA.authState));
-        startWA.ev.on('messages.upsert', async (m) => {   
+        startWA.ev.on('messages.upsert', async (m) => {
+            if (m.type == 'notify' && m.messages[0].key.id != id_antiduplicate){
+            id_antiduplicate = m.messages[0].key.id
             const msg = m.messages[0];
             const to = msg.key.remoteJid;
-            const get_numb = msg.key.participant == '' ? to:msg.key.participant;
-            console.log(saveName)
-            const addname = saveName.filter(data => data.jid === get_numb)
-            if (addname.length == 0 && !msg.key.fromMe){
-                saveName.push({name: msg.pushName, jid: get_numb})
-            }
+            const get_numb = msg.key.participant == undefined ? to:msg.key.participant;
             let dataconv
             if (msg.message != null){
             if (msg.message.conversation != '') {
@@ -132,18 +121,7 @@ async function mainWa() {
                 }
             }
             
-            const isName = (jid) => {
-                const addname = saveName.filter(data => data.jid === jid)
-                if (addname.length == 0){
-                    return null
-                } else {
-                    if (addname[0].name == ''){
-                        return null
-                    } else {
-                        return addname[0].name
-                    }
-                }
-            }
+
             function replyMsg(text){
                 startWA.sendMessage(to, {text : text}, {quoted: msg})
             }
@@ -153,9 +131,10 @@ async function mainWa() {
                 noArgs: isNoArgs(),
                 to: to,
                 isReply: checker_reply(msg),
-                NewPushName: isName,
                 reply: replyMsg,
-                txtmsg: dataconv
+                txtmsg: dataconv,
+                isgroup: isJidGroup(to),
+                loadmsg: store.loadMessage
             }
             comandtes.Allcmd.map(async (mesej) => {
                 if (msg.message?.conversation != '' || msg.message.extendedTextMessage != null) {
@@ -211,7 +190,9 @@ async function mainWa() {
                     }
                 }
             })
-
+        } else {
+            console.log(m.type)
+        }
         })
     } else {
         console.log('please scan qr on repl.it !');
