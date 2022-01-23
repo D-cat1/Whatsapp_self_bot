@@ -35,7 +35,7 @@ whats.addCmd({
     } else {
         let update = '⬆ Update Tersedia :\n\n'
         log_comm.all.forEach((data) => {
-            update += data.message + '\nOleh :' + data.author_name + '\n\n'
+            update += data.message + '\nOleh : ' + data.author_name + '\n\n'
         });
         const templateButtons = [{
                 index: 2,
