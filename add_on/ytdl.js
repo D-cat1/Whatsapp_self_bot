@@ -14,9 +14,9 @@ const mimt = require('mime')
 
 
 whats.addCmd({
-    name: 'ytl',
-    desc: 'membuat chat menjadi stiker',
-    hint: '.quote (reply yang dirubah jadi stiker _hanya bisa untuk text_)',
+    name: 'ytdl',
+    desc: 'downloader stream host',
+    hint: '.ytdl (link)',
 }, async (client, msg, args) => {
     if (msg.noArgs) return msg.reply('mana linknya?')
     const ytdl_api = await got.get('https://api.dcat.my.id/streamdl?link=' + args).json()
