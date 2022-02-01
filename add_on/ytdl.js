@@ -5,9 +5,7 @@ const {
     generateWAMessageFromContent
 } = require('@adiwajshing/baileys')
 const dataformat = []
-const {
-    default: got
-} = require('got')
+const dlyt = require('./ytdl_bin/ytdlp')
 const human = require('byte-size')
 const { format } = require('sharp')
 const mimt = require('mime')
@@ -19,7 +17,7 @@ whats.addCmd({
     hint: '.ytdl (link)',
 }, async (client, msg, args) => {
     if (msg.noArgs) return msg.reply('mana linknya?')
-    const ytdl_api = await got.get('https://api.dcat.my.id/streamdl?link=' + args).json()
+    const ytdl_api = await dlyt('https://api.dcat.my.id/streamdl?link=' + args)
     if (ytdl_api.error) {
         msg.reply(ytdl_api.Reason)
     } else {
