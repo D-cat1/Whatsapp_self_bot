@@ -7,8 +7,7 @@ const ytdlp = createYoutubeDl('././yt-dlp')
 const youtube_json = async (url) => {
     try {
         const dataJson = await ytdlp(url, {
-            dumpSingleJson: true,
-            noCheckCertificate: true,
+            dumpSingleJson: true
         })
         dataJson['error'] = false
         return dataJson
