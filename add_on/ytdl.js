@@ -17,7 +17,7 @@ whats.addCmd({
     hint: '.ytdl (link)',
 }, async (client, msg, args) => {
     if (msg.noArgs) return msg.reply('mana linknya?')
-    const ytdl_api = await dlyt('https://api.dcat.my.id/streamdl?link=' + args)
+    const ytdl_api = await dlyt(args)
     if (ytdl_api.error) {
         msg.reply(ytdl_api.Reason)
     } else {
