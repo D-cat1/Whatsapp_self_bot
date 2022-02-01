@@ -12,6 +12,7 @@ const youtube_json = async (url) => {
         dataJson['error'] = false
         return dataJson
     } catch (edr) {
+        console.log(edr)
         return {error : true, Reason: edr.shortMessage}
     }
 }
