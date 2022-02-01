@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV YOUTUBE_DL_SKIP_DOWNLOAD=true
 RUN apt update && apt upgrade -y
 RUN apt install curl ffmpeg wget git -y
 RUN curl -sL https://deb.nodesource.com/setup_17.x | bash -
