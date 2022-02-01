@@ -1,5 +1,5 @@
 const wiki = require('wikijs').default;
-
+const whatscmd = require('../command_list')
 
 whatscmd.addCmd({
     name: 'wiki',
