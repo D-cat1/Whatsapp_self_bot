@@ -125,6 +125,7 @@ async function mainWa() {
             function replyMsg(text){
                 startWA.sendMessage(to, {text : text}, {quoted: msg})
             }
+            
             const all_func = {
                 isAdmin: cek_admin,
                 message: msg,
