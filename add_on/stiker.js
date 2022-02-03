@@ -85,7 +85,7 @@ whatscmd.addCmd({
                     outfile: `${msg.message.key.id}-1.webp`,  // Required
                     topText: textmem[0],            // Required
                     bottomText: textmem[1] == undefined ? '': textmem[1],           // Optional // Optional
-                    fontSize: 45,                   // Optional
+                    fontSize: 37,                   // Optional
                     fontFill: '#FFF',               // Optional
                     textPos: 'center',              // Optional
                     strokeColor: '#000',            // Optional

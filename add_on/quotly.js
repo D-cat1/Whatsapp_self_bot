@@ -54,6 +54,7 @@ whatscmd.addCmd({
     hint: '.quote (reply yang dirubah jadi stiker _hanya bisa untuk text_)',
 }, async (client, msg, args) => {
     if (msg.isReply) {
+        msg.reply('loading....')
         var info = {}
         const jid_quoted = msg.message.message.extendedTextMessage.contextInfo.remoteJid == '' ? msg.message.message.extendedTextMessage.contextInfo.participant : msg.message.message.extendedTextMessage.contextInfo.remoteJid
         const key =  msg.message.message.extendedTextMessage.contextInfo.stanzaId
