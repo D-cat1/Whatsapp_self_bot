@@ -65,7 +65,7 @@ whatscmd.addCmd({
         } catch (a) {
             info['pp'] = 'https://i.ibb.co/PN1NkpY/avatrs.png'
         }
-        if (data_quote.pushName == null) {
+        if (data_quote?.pushName == null) {
             if (msg.noArgs) {
                 client.sendMessage(msg.to, {
                     text: 'Nama Tidak Terdeteksi Membutuhkan input manual'
