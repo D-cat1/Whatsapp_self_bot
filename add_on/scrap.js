@@ -27,7 +27,7 @@ whatscmd.addCmd({
 }, async (client, msg, args) => {
     if (msg.noArgs) return msg.reply('apa yang mau dicari di wiki ?')
     try {
-        client.sendMessage(msg.to, {audio: {url: `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(args)}&tl=id&client=tw-ob`}, ptt: true})
+        client.sendMessage(msg.to, {audio: {url: `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(args)}&tl=id&client=tw-ob`,},ptt: true, mimetype: 'audio/mp3'})
     } catch (e) {
         msg.reply('error terjadi')
     }
